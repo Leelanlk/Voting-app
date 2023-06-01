@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deployment
+spec:
+  selector:
+    matchLabels:
+      app: vote
+  template:
+    metadata:
+      labels:
+        app: vote
+    spec:
+      containers:
+      - image: postgres:9.4
+        name: db-deployment
+        env:
+          - name: POSTGRES-USER
+            value: "postgres"
+          - name: POSTGRES_PASSWORD
+            value: "postgres"
+          - name: POSTGRESS_HOST_AUTH_METHOD
+            value: trust
+        volumeMounts:
+            - mountPath: /data
+              name: redis-deployment
+      volumes:
+        - name: redis-deployment
+          emptyDir:
+
+     

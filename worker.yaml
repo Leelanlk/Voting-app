@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: worker
+  labels:
+    name: worker
+    app: vote
+spec:
+  selector:
+    matchLabels: 
+      name: worker
+      app: vote
+  
+  template:
+    metadata:
+      name: worker
+      labels: 
+        name: worker
+        app: vote
+    
+    spec:
+      containers:
+        - name: worker
+          image: kodekloud/examplevotingapp_worker:v1
+          resources:
+          ports:
+            - containerPort: 80
